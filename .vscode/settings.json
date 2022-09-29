@@ -1,0 +1,11 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "sqliteconnection",
+            "database": "${workspaceFolder:Aplikasi_Surat_Masuk}/core.db"
+        }
+    ]
+}

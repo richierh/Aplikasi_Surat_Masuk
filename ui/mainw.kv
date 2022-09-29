@@ -1,0 +1,30 @@
+MDBoxLayout:
+    md_bg_color: app.color
+
+    orientation :'vertical'
+    mainw:mainw
+    MainW:
+        id:mainw
+        Screen12:
+            id:screen1
+            name:'screen1'
+            MDBoxLayout:
+                orientation:'vertical'
+                MDLabel:
+                    text:'sudah jalan'
+                MDTextField:
+                    id:textinput
+                    hint_text: "Masukkan Pasword Key"
+                    mode: "rectangle"
+                    
+                MDRaisedButton:
+                    mainw:mainw
+                    id:verifbutton
+                    text:'Verifikasi'
+                    on_release:mainw.verifikasi(textinput.text)  
+                    # on_release: self.run()                  
+        Screen2:
+            id:screen2
+            name:'screen2'
+
+            

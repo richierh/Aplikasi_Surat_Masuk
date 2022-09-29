@@ -1,0 +1,116 @@
+<Screen2>:
+    MDBoxLayout:
+        orientation:'vertical'
+        # spacing:6
+        size_hint:1,1
+        MDBoxLayout:
+            orientation:'vertical'
+            size_hint:1,None
+            pos_hint: {'center_x': 0.5,'center_y': 0.5}
+            MDLabel :
+                text:'Input Surat Masuk'
+                halign: 'center'
+                font_style:'H5'
+        
+        MyMDGridLayout:
+            # listinput:['','','','','']
+            # nourut:nourut
+            # suratdari:suratdari
+            # nosurat:nosurat
+            # tanggalsurat:tanggalsurat
+            # perihal:perihal
+            spacing:2
+            size_hint:1,.5
+            # col_default_width:100
+            # col_force_default:True
+            padding:[10,0,0,0]
+            cols:2
+            rows:5
+            MDLabel:
+                text :'No Urut'
+                size_hint:.3,0
+            MDTextFieldRect:
+                id:nourut
+                text:self.parent.listinput[0]
+                size_hint:.5,None
+                width: '50dp'
+                height:'30dp'
+                pos : 100,100
+
+            MDLabel:
+                text :'Surat Dari'
+                size_hint:.3,0
+            MDTextFieldRect:
+                id:suratdari
+                size_hint:1,None
+                width: '30dp'
+                height:'30dp'
+
+            MDLabel:
+                text :'No Surat'
+                size_hint:.3,0
+            MDTextFieldRect:
+                id:nosurat
+                size_hint_y: None
+                height:'30dp'
+
+            MDLabel:
+                text :'Tanggal Surat'
+                size_hint:.3,0
+            MDTextFieldRect:
+                id:tanggalsurat
+                size_hint_y: None
+                size_hint_x:None
+                height:'30dp'
+                padding:['50dp',0,0,0]
+
+            MDLabel:
+                text :'Perihal'
+                size_hint:.3,0
+            MDTextField:
+                id:perihal
+                multiline: True
+                hint_text: "Multi-line text"
+                size_hint_y: None
+                height:'30dp'
+                max_height: "100dp"
+        MDBoxLayout:
+            orientation:'vertical'
+            size_hint:1,.8
+            pos_hint: {'center_x': 0.5,'center_y': 0.5}
+            MDBoxLayout:
+                orientation:'horizontal'
+                mddata:mddata
+                name:'boxlayout'
+                MDData:
+                    name:'datatable'
+                    id:mddata
+                    size_hint:.9,1
+                    pos_hint: {'center_x': 0.5,'center_y': 0.5}
+                MDBoxLayout:
+                    size_hint :.1,None
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    orientation:'vertical'
+                    MDIconButton:
+                        size_hint :.6,None
+                        icon: "account-details"
+                        pos_hint: {"center_x": .5, "center_y": .5}
+                    MDIconButton:
+                        size_hint :.6,None
+                        icon: "plus-circle"
+                        pos_hint: {"center_x": .5, "center_y": .5}
+                        on_release:mddata.add(nourut,suratdari,nosurat,tanggalsurat,perihal)
+                    MDIconButton:
+                        size_hint :.6,None
+                        # icon_size: dp(64)
+                        # icon: "ui/img/Refresh_icon.png"
+                        icon:'refresh'
+                        pos_hint: {"center_x": .5, "center_y": .5}
+                        on_release:mddata.refresh()
+                    MDIconButton:
+                        size_hint :.6,None
+                        text: "Delete"
+                        icon:'delete'
+                        # md_bg_color: "red"
+                        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+                        on_release:mddata.delete()

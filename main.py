@@ -7,18 +7,17 @@ from ui import view,mainw
 # Window.size = (400, 700)
 # Window.maximize()
 from ui.theming import *
+from kivy.utils import platform
 
 class MainRun(MDApp):
     def build(self):
         # self.theme_cls.colors = colors
-        self.theme_cls.primary_palette = "Teal"
-        self.theme_cls.primary_hue='100'
-        self.theme_cls.accent_palette = "Teal"
-        self.theme_cls.accent_hue='50'
-        self.color=self.theme_cls.primary_color
-        
-        
-        
+        # self.theme_cls.primary_palette = "Teal"
+        # self.theme_cls.primary_hue='100'
+        # self.theme_cls.accent_palette = "Teal"
+        # self.theme_cls.accent_hue='50'
+        # self.color=self.theme_cls.primary_color
+
         mylistkv = []
         # this loop for list file with extension .kv only
         for file in os.listdir("ui"):
@@ -32,8 +31,7 @@ class MainRun(MDApp):
             Builder.load_file("ui/{}".format(kv_list))
             
             
-        from kivy.utils import platform
-
+  
         
         if platform == 'linux':
             if mainw.folderlinux():

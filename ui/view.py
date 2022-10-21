@@ -7,8 +7,16 @@ from kivy.properties import ObjectProperty,ListProperty
 from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.gridlayout import MDGridLayout
 from kivy.uix.screenmanager import Screen
+from kivymd.uix.textfield import MDTextFieldRect
+from kivy.clock import Clock
 
 
+class Profile(Screen):
+    pass
+
+class NoUrut(MDTextFieldRect):
+    
+    pass
 
 class MyMDGridLayout(MDGridLayout):
     listinput = ListProperty()
@@ -22,6 +30,7 @@ class MyMDGridLayout(MDGridLayout):
      
 
 class MDData(Screen):
+    
     mddata = ObjectProperty()
     listdata=ObjectProperty(['','','','',''])
     
@@ -33,13 +42,22 @@ class MDData(Screen):
         self.last_queue = self.SuratMasuk.last_queue()
         self.run_table(self.SuratMasuk.select_all())
         self.closedb = close_connection(self.connectdb)
+    
+    def profile(self):
+        # Disini diisi dengan data dari profil yang di click
+        if len(self.data_tables.get_row_checks()) == 1:
+            self.data_tables.get_row_checks()
+            self.mainw.current='profile'
+        
             
-    def delete(self):
+    def delete(self,*args):
+        def deselect_rows(*args):
+            self.data_tables.table_data.select_all("normal")
 
         # ini adalah fungsi delete yang ada di widget MDRaisedButton
         # print('berfungsi dengan sempurna')
 
-        print (self.data_tables.get_row_checks())
+        # print (self.data_tables.get_row_checks())
         # print (self.k)
         for data_del in self.data_tables.get_row_checks():
             data_del[0] = int(data_del[0])
@@ -50,12 +68,28 @@ class MDData(Screen):
             self.data_tables.remove_row(data_del)
             # self.refresh()
 
+        for textinput in args:
+            textinput.text = ''
+            if list(args).index(textinput) == 0:
+                self.connectdb = create_connection(self.nama_file)
+                self.SuratMasuk = SuratMasuk(self.connectdb)
+                self.last_queue = self.SuratMasuk.last_queue()
+                self.closedb = close_connection(self.connectdb)
+                self.Add = int(self.last_queue)+1
+                textinput.text = str(self.Add)
+
+
+
+
+        Clock.schedule_once(deselect_rows)
+
 
                 
     def refresh(self,*args):
         try:
             self.update=MDData()
             self.data_tables.update_row_data(self.update.data_tables,self.update.data_tables.row_data)
+
         except:
             pass
 
@@ -68,6 +102,18 @@ class MDData(Screen):
                 self.closedb = close_connection(self.connectdb)
                 self.Add = int(self.last_queue)+1
                 textinput.text = str(self.Add)
+
+        
+        
+        # def update_rowlast(*args):
+        #     self.data= NoUrut()
+        #     # import pdb
+        #     # pdb.set_trace()
+        #     pass
+            
+        # Clock.schedule_once(update_rowlast)
+
+                
     def add(self,*args):
         self.list = []
         for textinput in args:

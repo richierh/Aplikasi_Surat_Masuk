@@ -1,7 +1,7 @@
 <Screen2>:
+    mainw:root.mainw
     MDBoxLayout:
         orientation:'vertical'
-        # spacing:6
         size_hint:1,1
         MDBoxLayout:
             orientation:'vertical'
@@ -13,23 +13,16 @@
                 font_style:'H5'
         
         MyMDGridLayout:
-            # listinput:['','','','','']
-            # nourut:nourut
-            # suratdari:suratdari
-            # nosurat:nosurat
-            # tanggalsurat:tanggalsurat
-            # perihal:perihal
             spacing:2
-            size_hint:1,.5
-            # col_default_width:100
-            # col_force_default:True
+            size_hint:1,.4
             padding:[10,0,0,0]
             cols:2
-            rows:5
+            rows:6
+            nourut:nourut
             MDLabel:
                 text :'No Urut'
                 size_hint:.3,0
-            MDTextFieldRect:
+            NoUrut:
                 id:nourut
                 text:self.parent.listinput[0]
                 size_hint:.5,None
@@ -53,16 +46,35 @@
                 id:nosurat
                 size_hint_y: None
                 height:'30dp'
-
+        
             MDLabel:
                 text :'Tanggal Surat'
-                size_hint:.3,0
-            MDTextFieldRect:
-                id:tanggalsurat
-                size_hint_y: None
-                size_hint_x:None
-                height:'30dp'
-                padding:['50dp',0,0,0]
+                size_hint:.35,0
+
+            MDGridLayout:
+                cols:2
+                rows:1
+
+                MDTextFieldRect:
+                    id:tanggalsurat
+                    size_hint:1,None
+                    width: '200dp'
+                    height:'30dp' 
+                    # pos_hint: {'center_x': 0,'center_y': 0.0}
+
+                MDBoxLayout:
+                    orientation:'horizontal'
+                    padding: (10,0,10,0)
+                    size_hint: .5,None
+                    height:30
+                    MDRaisedButton:
+                        size_hint: 1,1
+                        # increment_width: "164dp"
+                        # width:'100dp'
+                        # padding: (100,10,10,10)
+                        text:'Klik Tanggal'
+                        # size_hint:.2,.3
+                        # pos_hint: {'center_x': 0.5,'center_y': 0.0}
 
             MDLabel:
                 text :'Perihal'
@@ -74,9 +86,10 @@
                 size_hint_y: None
                 height:'30dp'
                 max_height: "100dp"
+
         MDBoxLayout:
             orientation:'vertical'
-            size_hint:1,.8
+            size_hint:1,.6
             pos_hint: {'center_x': 0.5,'center_y': 0.5}
             MDBoxLayout:
                 orientation:'horizontal'
@@ -84,6 +97,7 @@
                 name:'boxlayout'
                 MDData:
                     name:'datatable'
+                    mainw:root.mainw
                     id:mddata
                     size_hint:.9,1
                     pos_hint: {'center_x': 0.5,'center_y': 0.5}
@@ -95,6 +109,7 @@
                         size_hint :.6,None
                         icon: "account-details"
                         pos_hint: {"center_x": .5, "center_y": .5}
+                        on_release:mddata.profile()
                     MDIconButton:
                         size_hint :.6,None
                         icon: "plus-circle"
@@ -102,15 +117,12 @@
                         on_release:mddata.add(nourut,suratdari,nosurat,tanggalsurat,perihal)
                     MDIconButton:
                         size_hint :.6,None
-                        # icon_size: dp(64)
-                        # icon: "ui/img/Refresh_icon.png"
                         icon:'refresh'
                         pos_hint: {"center_x": .5, "center_y": .5}
-                        on_release:mddata.refresh()
+                        on_release:mddata.refresh(nourut,suratdari,nosurat,tanggalsurat,perihal)
                     MDIconButton:
                         size_hint :.6,None
                         text: "Delete"
                         icon:'delete'
-                        # md_bg_color: "red"
                         pos_hint: {'center_x': 0.5,'center_y': 0.5}
-                        on_release:mddata.delete()
+                        on_release:mddata.delete(nourut,suratdari,nosurat,tanggalsurat,perihal)

@@ -13,7 +13,7 @@ package.domain = org.test.ASM
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas
+source.include_exts = py,png,jpg,kv,atlas,db
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -22,11 +22,12 @@ source.include_exts = py,png,jpg,kv,atlas
 #source.exclude_exts = spec
 
 # (list) List of directory to exclude (let empty to not exclude anything)
-#source.exclude_dirs = tests, bin, venv
+source.exclude_dirs = .git, bin, .vscode,.buildozer
 
 # (list) List of exclusions using pattern matching
 # Do not prefix with './'
 #source.exclude_patterns = license,images/*/*.jpg
+#source.exclude_patterns = testdb.py,example.py,minimalcode.py,.gitignore,.project,*.sql
 
 # (str) Application versioning (method 1)
 version = 0.1
@@ -37,7 +38,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,kivymd,sqlite3
+requirements = python3==3.9.13,kivy==2.1.0,kivymd==1.0.2,sqlite3,pillow,watchdog
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -52,7 +53,7 @@ requirements = python3,kivy,kivymd,sqlite3
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = all
 
-# (list) List of service to declare
+ # (list) List of service to declare
 #services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
 
 #
@@ -67,6 +68,7 @@ osx.python_version = 3.9.13
 
 # Kivy version to use
 osx.kivy_version = 2.1.0
+
 
 #
 # Android specific
@@ -287,10 +289,10 @@ android.allow_backup = True
 # android.no-compile-pyo = True
 
 # (str) The format used to package the app for release mode (aab or apk or aar).
-android.release_artifact = apk
+#android.release_artifact = apk
 
 # (str) The format used to package the app for debug mode (apk or aar).
-android.debug_artifact = apk
+#android.debug_artifact = apk
 
 #
 # Python for android (p4a) specific
@@ -303,7 +305,7 @@ android.debug_artifact = apk
 #p4a.fork = kivy
 
 # (str) python-for-android branch to use, defaults to master
-p4a.branch = develop
+p4a.branch = master
 
 # (str) python-for-android specific commit to use, defaults to HEAD, must be within p4a.branch
 #p4a.commit = HEAD

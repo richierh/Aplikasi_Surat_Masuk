@@ -36,11 +36,13 @@ class MDData(Screen):
     
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.nama_file = 'core.db'
+        self.dir_file = 'models/'
+        self.db_file = 'core.db'
+        self.nama_file = '{}{}'.format(self.dir_file,self.db_file)
         self.connectdb = create_connection(self.nama_file)
         self.SuratMasuk = SuratMasuk(self.connectdb)
         self.last_queue = self.SuratMasuk.last_queue()
-        self.run_table(self.SuratMasuk.select_all())
+        self.run_table(self.SuratMasuk.select_all()) 
         self.closedb = close_connection(self.connectdb)
     
     def profile(self):
@@ -49,7 +51,7 @@ class MDData(Screen):
             self.data_tables.get_row_checks()
             self.mainw.current='profile'
         
-            
+
     def delete(self,*args):
         def deselect_rows(*args):
             self.data_tables.table_data.select_all("normal")

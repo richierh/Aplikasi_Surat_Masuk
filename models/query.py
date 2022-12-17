@@ -15,7 +15,6 @@ class InsertData():
              
     
     def __str__(self):
-
         return str('Masuukan data sukses')
 
 

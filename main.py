@@ -1,9 +1,11 @@
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from ui.view import MDData
+# import for verification python file
+from ui import view,mainw
+
 # from kivy.core.window import Window
 import os
-from ui import view,mainw
 # Window.size = (400, 700)
 # Window.maximize()
 from ui.theming import *
@@ -29,9 +31,6 @@ class MainRun(MDApp):
         for kv_list in mylistkv :
             print(kv_list)
             Builder.load_file("ui/{}".format(kv_list))
-            
-            
-  
         
         if platform == 'linux':
             if mainw.folderlinux():
@@ -44,4 +43,5 @@ class MainRun(MDApp):
 
         return self.load_kv 
 
-MainRun().run()
+if __name__ =="__main__":
+	MainRun().run()
